@@ -1,0 +1,36 @@
+type = "x86_64"
+arch = "Ubuntu"
+author = "Waldemar Celes, Ariel Manzur"
+depends = {
+[[lua ~> 5.1]],
+}
+
+desc = "tolua++ is an extension of toLua, a tool to integrate C/Cpp code with Lua."
+version = "1.0.93"
+maintainer = "Peter Kapec"
+files = {
+Runtime = {
+[[lib/libtoluapp.so]],
+[[bin/toluapp]],
+}
+,
+Documentation = {
+[[share/toluapp/doc//toluapp.gif]],
+[[share/toluapp/doc//tolua++.html]],
+[[share/toluapp/doc//index.html]],
+}
+,
+Header = {
+[[include//tolua++.h]],
+}
+,
+Data = {
+[[share/toluapp/README]],
+[[share/toluapp/INSTALL]],
+}
+,
+}
+
+license = "as-is"
+name = "toluapp"
+url = "http://www.codenix.com/~tolua/"
