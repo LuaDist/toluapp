@@ -1,5 +1,5 @@
 This version of tolua++ uses SCons to compile (http://www.scons.org). SCons uses
-pythin. If you don't want to install python, check "Installation without scons"
+python. If you don't want to install python, check "Installation without scons"
 below.
 
 * Installation
