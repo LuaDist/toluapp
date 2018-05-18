@@ -47,7 +47,7 @@ function doit ()
 	if not flags['S'] then
 		_basic['string'] = 'cppstring'
 		_basic['std::string'] = 'cppstring'
-		_basic_ctype.cppstring = 'const char*'
+		_basic_ctype.cppstring = 'string'
 	end
 
 	-- proccess package
