@@ -12,6 +12,7 @@
 ** enhancements, or modifications.
 */
 
+//fix cppstring by https://github.com/ktty/toluapp
 
 #ifndef TOLUA_H
 #define TOLUA_H
@@ -23,10 +24,11 @@
 #define TOLUA_VERSION "tolua++-1.0.92"
 
 #ifdef __cplusplus
+#include <string>
 extern "C" {
 #endif
 
-#define tolua_pushcppstring(x,y)	tolua_pushstring(x,y.c_str())
+#define tolua_pushcppstring(x,y)	tolua_pushlstring(x,(y).c_str(),(y).size())
 #define tolua_iscppstring	tolua_isstring
 
 #define tolua_iscppstringarray tolua_isstringarray
@@ -107,6 +109,7 @@ TOLUA_API void tolua_pushvalue (lua_State* L, int lo);
 TOLUA_API void tolua_pushboolean (lua_State* L, int value);
 TOLUA_API void tolua_pushnumber (lua_State* L, lua_Number value);
 TOLUA_API void tolua_pushstring (lua_State* L, const char* value);
+TOLUA_API void tolua_pushlstring (lua_State* L, const char* value,unsigned int size);
 TOLUA_API void tolua_pushuserdata (lua_State* L, void* value);
 TOLUA_API void tolua_pushusertype (lua_State* L, void* value, const char* type);
 TOLUA_API void tolua_pushusertype_and_takeownership(lua_State* L, void* value, const char* type);
@@ -136,10 +139,12 @@ TOLUA_API void tolua_dobuffer(lua_State* L, char* B, unsigned int size, const ch
 TOLUA_API int class_gc_event (lua_State* L);
 
 #ifdef __cplusplus
-static inline const char* tolua_tocppstring (lua_State* L, int narg, const char* def) {
-
-	const char* s = tolua_tostring(L, narg, def);
-	return s?s:"";
+static inline std::string tolua_tocppstring (lua_State* L, int narg, const char* def) 
+{
+    size_t len;
+    const char*s = lua_tolstring(L,narg,&len);
+    std::string data(s,len);
+    return data;
 };
 
 static inline const char* tolua_tofieldcppstring (lua_State* L, int lo, int index, const char* def) {
