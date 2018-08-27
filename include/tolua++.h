@@ -28,7 +28,7 @@
 extern "C" {
 #endif
 
-#define tolua_pushcppstring(x,y)	tolua_pushlstring(x,y.c_str(),y.size())
+#define tolua_pushcppstring(x,y)	tolua_pushlstring(x,(y).c_str(),(y).size())
 #define tolua_iscppstring	tolua_isstring
 
 #define tolua_iscppstringarray tolua_isstringarray
@@ -139,11 +139,11 @@ TOLUA_API void tolua_dobuffer(lua_State* L, char* B, unsigned int size, const ch
 TOLUA_API int class_gc_event (lua_State* L);
 
 #ifdef __cplusplus
-static inline string tolua_tocppstring (lua_State* L, int narg, const char* def) 
+static inline std::string tolua_tocppstring (lua_State* L, int narg, const char* def) 
 {
     size_t len;
-    const char*s = lua_tolstring(L,narg,len);
-    string data(s,len);
+    const char*s = lua_tolstring(L,narg,&len);
+    std::string data(s,len);
     return data;
 };
 
