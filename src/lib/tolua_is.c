@@ -310,7 +310,7 @@ TOLUA_API int tolua_isvaluenil(lua_State *L, int lo, tolua_Error *err)
 	err->array = 0;
 	err->type = "value";
 	return 1;
-};
+}
 
 TOLUA_API int tolua_isvalue(lua_State *L, int lo, int def, tolua_Error *err)
 {
@@ -334,8 +334,9 @@ TOLUA_API int tolua_isusertype(lua_State *L, int lo, const char *type, int def, 
 	return 0;
 }
 
-TOLUA_API int tolua_isvaluearray(lua_State *L, int lo, int, int def, tolua_Error *err)
+TOLUA_API int tolua_isvaluearray(lua_State *L, int lo, int dim, int def, tolua_Error *err)
 {
+	(void)dim;
 	if (!tolua_istable(L, lo, def, err))
 		return 0;
 	else
