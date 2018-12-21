@@ -76,7 +76,9 @@ static void add_extra(lua_State *L, const char *value)
   lua_pop(L, 1);
 }
 
-[[noreturn]] static void error(char *o)
+static void error(char *o) __attribute__((noreturn));
+
+static void error(char *o)
 {
   fprintf(stderr, "tolua: unknown option '%s'\n", o);
   help();
