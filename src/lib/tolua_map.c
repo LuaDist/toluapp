@@ -34,7 +34,7 @@ static int tolua_newmetatable(lua_State *L, const char *name)
 		lua_pushvalue(L, -1);
 		lua_pushstring(L, name);
 		lua_settable(L, LUA_REGISTRYINDEX); /* reg[mt] = type_name */
-	};
+	}
 #endif
 
 	if (r)
@@ -100,7 +100,7 @@ static void set_ubox(lua_State *L)
 	else
 	{
 		lua_pushnil(L);
-	};
+	}
 	/* mt basemt base_ubox */
 	if (!lua_isnil(L, -1))
 	{
@@ -124,8 +124,8 @@ static void set_ubox(lua_State *L)
 		lua_rawset(L, -3);		 /* stack: string ubox mt */
 		lua_setmetatable(L, -2); /* stack:mt basemt string ubox */
 		lua_rawset(L, -4);
-	};
-};
+	}
+}
 
 /* Map inheritance
 	* It sets 'name' as derived from 'base' by setting 'base' as metatable of 'name'
@@ -144,9 +144,9 @@ static void mapinheritance(lua_State *L, const char *name, const char *base)
 		{ /* already has a mt, we don't overwrite it */
 			lua_pop(L, 2);
 			return;
-		};
+		}
 		luaL_getmetatable(L, "tolua_commonclass");
-	};
+	}
 
 	set_ubox(L);
 
@@ -241,7 +241,7 @@ static int tolua_bnd_cast(lua_State *L)
 	else
 	{
 		v = tolua_tousertype(L, 1, 0);
-	};
+	}
 
 	s = tolua_tostring(L, 2, NULL);
 	if (v && s)
@@ -263,7 +263,7 @@ static int tolua_bnd_inherit(lua_State *L)
 	/* l_obj[".c_instance"] = c_obj */
 
 	return 0;
-};
+}
 
 #ifdef LUA_VERSION_NUM /* lua 5.1 */
 static int tolua_bnd_setpeer(lua_State *L)
@@ -304,9 +304,9 @@ static int tolua_bnd_getpeer(lua_State *L)
 	{
 		lua_pop(L, 1);
 		lua_pushnil(L);
-	};
+	}
 	return 1;
-};
+}
 #endif
 
 /* static int class_gc_event (lua_State* L); */
@@ -561,15 +561,15 @@ static void push_collector(lua_State *L, const char *type, lua_CFunction col)
 		if (!lua_isnil(L, -1)) {
 			lua_pop(L, 3);
 			return;
-		};
+		}
 		lua_pop(L, 1);
-	};
+	}
 	//	*/
 	lua_pushcfunction(L, col);
 
 	lua_rawset(L, -3);
 	lua_pop(L, 1);
-};
+}
 
 /* Map C class
 	* It maps a C class, setting the appropriate inheritance and super classes.
@@ -625,7 +625,7 @@ TOLUA_API void tolua_addbase(lua_State* L, char* name, char* base) {
 
 	mapsuper(L,cname,cbase);
 	mapsuper(L,name,base);
-};
+}
 */
 
 /* Map function
@@ -648,7 +648,7 @@ TOLUA_API void tolua_set_call_event(lua_State* L, lua_CFunction func, char* type
 	lua_pushcfunction(L,func);
 	lua_rawset(L,-3);
 	lua_pop(L, 1);
-};
+}
 */
 
 /* Map constant number
@@ -753,4 +753,4 @@ TOLUA_API void tolua_dobuffer(lua_State *L, char *B, unsigned int size, const ch
 #else
 	lua_dobuffer(L, B, size, name);
 #endif
-};
+}

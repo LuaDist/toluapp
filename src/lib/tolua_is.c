@@ -35,7 +35,7 @@ TOLUA_API int tolua_fast_isa(lua_State *L, int mt_indexa, int mt_indexb, int sup
 		{
 			lua_pushliteral(L, "tolua_super");
 			lua_rawget(L, LUA_REGISTRYINDEX); /* stack: super */
-		};
+		}
 		lua_pushvalue(L, mt_indexa);	  /* stack: super mta */
 		lua_rawget(L, -2);				  /* stack: super super[mta] */
 		lua_pushvalue(L, mt_indexb);	  /* stack: super super[mta] mtb */
