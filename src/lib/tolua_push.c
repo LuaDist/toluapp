@@ -101,12 +101,13 @@ TOLUA_API void tolua_pushusertype (lua_State* L, void* value, const char* type)
 					lua_remove(L, -2);
 					return;
 				}
+			
+				/* type represents a more specilized type */
+				/*luaL_getmetatable(L,type);             // stack: mt ubox[u] super super[mt] flag mt */
+				lua_pushvalue(L, -5);					/* stack: mt ubox[u] super super[mt] flag mt */
+				lua_setmetatable(L,-5);                /* stack: mt ubox[u] super super[mt] flag */
+				lua_pop(L,3);                          /* stack: mt ubox[u] */
 			}
-			/* type represents a more specilized type */
-			/*luaL_getmetatable(L,type);             // stack: mt ubox[u] super super[mt] flag mt */
-			lua_pushvalue(L, -5);					/* stack: mt ubox[u] super super[mt] flag mt */
-			lua_setmetatable(L,-5);                /* stack: mt ubox[u] super super[mt] flag */
-			lua_pop(L,3);                          /* stack: mt ubox[u] */
   }
   lua_remove(L, -2);	/* stack: ubox[u]*/
  }
